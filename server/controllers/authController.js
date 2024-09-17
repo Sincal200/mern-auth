@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { hashPassword, comparePassword } = require('../helpers/Auth');
 
 const test = (req, res) => {
     res.json('Hello from the server!');
@@ -38,8 +39,11 @@ const registerUser = async (req, res) => {
             })
         };
 
+        const hashedPassword = await hashPassword(password);
         const user = await User.create({
-            name, email, password
+            name, 
+            email, 
+            password: hashedPassword
         })
 
         return res.json(user);
