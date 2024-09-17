@@ -7,9 +7,21 @@ const test = (req, res) => {
 const registerUser = async (req, res) => {
    try {
         const { name, email, password } = req.body;
-        if(!name ) {
+        if(!name) {
             return res.json({
                 error: 'Name is required'
+            })
+        };
+
+        if(!email) {
+            return res.json({
+                error: 'Email is required'
+            })
+        };
+
+        if(!email && !name) {
+            return res.json({
+                error: 'Please fill the form'
             })
         };
 
@@ -19,7 +31,7 @@ const registerUser = async (req, res) => {
             })
         };
 
-        const exist = User.findOne({email});
+        const exist = await User.findOne({email});
         if(exist) {
             return res.json({
                 error: 'Email is take already'
