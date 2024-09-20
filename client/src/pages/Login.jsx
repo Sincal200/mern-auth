@@ -23,7 +23,7 @@ export default function Login() {
       } else {
         setData({});
         toast.success('Login successfull. Welcome to the app');
-        navigate('/')
+        navigate('/dashboard')
       }
     } catch (error) {
       
